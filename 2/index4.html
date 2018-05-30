@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性，方法，监听器</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h3>{{fullName}} {{age}}</h3>
+</div>
+<script>
+    //插值表达式
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            FristName: 'Zarva',
+            LastName: 'lee',
+            // fullName: 'Zarva lee',
+            age: '25'
+        },
+        computed: { //计算属性
+            fullName: function () {  //了结计算属性的缓存机制
+                console.log('计算了一次');
+                return this.FristName +" "+ this.LastName;
+            }
+        },
+        // methods: {
+        //     fullName: function () { // 此方案也能实现计算，但是没有缓存的机制
+        //         console.log('计算了一次');
+        //         return this.FristName +" "+ this.LastName;
+        //     }
+        // },
+        // watch: {  //跟计算属性对比，具有缓存机制，都是监听依赖的属性变化才会去重新去计算。缺点：代码冗余
+        //     FristName: function () {
+        //         console.log('计算了一次');
+        //         this.fullName = this.FristName + " " + this.LastName;
+        //     },
+        //     LastName: function () {
+        //         console.log('计算了一次');
+        //         this.fullName = this.FristName + " " + this.LastName;
+        //     }
+        // }
+    })
+</script>
+</body>
+</html>

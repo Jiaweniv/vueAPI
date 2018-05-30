@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 实例</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root" @click="handleClick">
+        {{content}}
+        <item></item>
+    </div>
+    <script>
+        Vue.component('item',{
+            template: '<div>hello，nice to meet you</div>'
+        })
+        var vm = new Vue({
+            el: '#root',
+            data: {
+                content: 'hello world'
+            },
+            methods: {
+                handleClick: function () {
+                    alert('hello')
+                }
+            }
+        });
+    </script>
+</body>
+</html>

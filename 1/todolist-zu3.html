@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TodoList</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="inputVal">
+    <button @click="handleBtnClick">提交</button>
+    <ul>
+        <todo-item
+                :content="item"
+                @delect="ItemDelect"
+                :index="index"
+                v-for="(item,index) in list">
+        </todo-item>
+    </ul>
+</div>
+<script>
+    // 局部组件
+    // 子组件向父组件传值
+    var chirld = {
+        template: "<li @click='ItemClick'>{{content}}</li>",
+        props: ['content','index'],
+        methods: {
+            ItemClick: function () {
+                this.$emit('delect',[this.index,this.content])
+            }
+        }
+    };
+    var app = new Vue({
+        el: '#app',
+        data: {
+            list: [],
+            inputVal: ''
+        },
+        components: {
+            TodoItem: chirld
+        },
+        methods:{
+            handleBtnClick:function () {
+                var that = this;
+                if(that.inputVal){
+                    that.list.push(that.inputVal);
+                    that.inputVal = ''
+                }
+            },
+            ItemDelect: function (arr) {
+                this.list.splice(arr[0],1)
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>内联样式绑定</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        .active{
+            color: steelblue;
+        }
+    </style>
+</head>
+
+<body>
+<div id="app">
+    <h3 @click="handleClick"
+        :style="styleObj"
+    >
+        {{fullName}}
+    </h3>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            FristName: 'Zarva',
+            LastName: 'lee',
+            styleObj: {
+                color: 'black'
+            }
+        },
+        computed: {
+            fullName: {  //计算属性 深入
+                get: function () {
+                    return this.FristName +" "+ this.LastName;
+                },
+                set: function (val) {
+                    var str = val.split(' ');
+                    this.FristName = str[0];
+                    this.LastName = str[str.length - 1];
+                }
+            }
+        },
+        methods: {
+            handleClick: function () {
+                this.styleObj.color = this.styleObj.color === "black" ? 'red' : 'black';
+            }
+        }
+    })
+</script>
+</body>
+</html>

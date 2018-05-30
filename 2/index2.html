@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 实例生命周期函数</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+    </div>
+    <script>
+        //vue 实例生命周期函数就是在vue实例在摸一个时间点会自动执行的函数
+
+        //实例生命周期函数讲解
+        //https://www.cnblogs.com/penghuwan/p/7192203.html
+        //https://segmentfault.com/a/1190000008010666#articleHeader7
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                'test': 'hellp'
+            },
+            template: '<div>{{test}}</div>',
+            beforeCreate: function () {
+                //在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
+                console.log('调用了beforeCreat钩子函数')
+            },
+            created: function () {
+                //在实例创建完成后被立即调用。
+                // 在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，watch/event 事件回调。
+                // 然而，挂载阶段还没开始，$el 属性目前不可见。
+                console.log('调用了created钩子函数')
+            },
+            beforeMount: function () {
+                //在挂载开始之前被调用：相关的 render 函数首次被调用。
+                //该钩子在服务器端渲染期间不被调用。
+                console.log(this.$el);
+                console.log('调用了beforeMount钩子函数')
+            },
+            mounted: function () {
+                //el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子。
+                // 如果 root 实例挂载了一个文档内元素，当 mounted 被调用时 vm.$el 也在文档内。
+                console.log(this.$el);
+                console.log('调用了mounted钩子函数')
+            },
+            beforeDestroy: function () {
+                //调用vm实例销毁属性
+                // vm.$destroy();
+                console.log('调用了beforeDestory钩子函数')
+            },
+            destroyed: function () {
+                //调用vm实例销毁属性
+                // vm.$destroy();
+                console.log('调用了destoryed钩子函数')
+            },
+            beforeUpdate: function () {
+                console.log('调用了beforeUpdated钩子函数')
+            },
+            updated: function () {
+                console.log('调用了update钩子函数')
+            }
+        });
+    </script>
+</body>
+</html>

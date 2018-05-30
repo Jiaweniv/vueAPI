@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性，方法，监听器</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h3>{{fullName}}</h3>
+</div>
+<script>
+    //插值表达式
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            FristName: 'Zarva',
+            LastName: 'lee'
+        },
+        computed: {
+            fullName: {  //计算属性 深入
+                get: function () {
+                    return this.FristName +" "+ this.LastName;
+                },
+                set: function (val) {
+                    var str = val.split(' ');
+                    this.FristName = str[0];
+                    this.LastName = str[str.length - 1];
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
