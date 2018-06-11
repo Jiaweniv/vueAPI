@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件参数校验与非Props特性</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        .active{
+            color: steelblue;
+        }
+    </style>
+</head>
+
+<body>
+<div id="app">
+    <h4>父组件给子组件传递参数的时候，带”：“传递过去的是值，不带的时候传递过去的是字符串</h4>
+    <template-item :conenet="123" conenet2="leesXX"></template-item>
+</div>
+<script>
+    var templateItem = {
+        template: '<div >{{number}}<div >{{number2}}</div></div>',
+        props:{
+            conenet:[Number,String],
+            conenet2:{
+                type: String,
+                required: false,
+                default: 'default value',
+                validator: function(value){
+                    //字符串长度校验
+                    return (value.length > 5)
+                }
+            } 
+        },
+        data: function(){
+            return { 
+                number: this.conenet,
+                number2: this.conenet2
+            }
+        }
+    }
+    var vm = new Vue({
+        el: '#app',
+        data: {
+
+        },
+        components:{
+            templateItem:templateItem
+        }
+    })
+</script>
+</body>
+</html>

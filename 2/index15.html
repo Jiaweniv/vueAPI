@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件间的传递</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        .active{
+            color: steelblue;
+        }
+    </style>
+</head>
+
+<body>
+<div id="app">
+    <template-item @change="totleAdd" :count="2"></template-item>
+    <template-item @change="totleAdd" :count="1"></template-item>
+    <div>{{totle}}</div>
+</div>
+<script>
+    var templateItem = {
+        template: '<div @click="hanldClick">{{number}}</div>',
+        props:['count'],
+        data: function(){
+            return {
+                number: this.count
+            }
+        },
+        methods: {
+            hanldClick: function(){
+                this.number ++;
+                this.$emit('change', 1)
+            }
+        }
+    }
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            totle: 0
+        },
+        components:{
+            templateItem:templateItem
+        },
+        methods: {
+            totleAdd: function(step){
+                this.totle += step
+            }
+        }
+    })
+</script>
+</body>
+</html>

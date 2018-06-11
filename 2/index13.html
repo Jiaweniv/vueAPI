@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>set方法</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        .active{
+            color: steelblue;
+        }
+    </style>
+</head>
+
+<body>
+<div id="app">
+    <div v-for="(item,key,index) of userInfo">
+            {{item}}---{{key}} ----{{index}}
+        </div>
+
+        <div v-for="(item,index) of list">
+                {{item}}
+            </div>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            userInfo:{
+                name: 'Zarva',
+                age: '26',
+                love: '机车'
+            },
+            list: [1, 2, 3, 4, 5]
+                
+        }
+    })
+    vm.$set(vm.userInfo,'address','北京')
+    Vue.set(vm.userInfo,'sex','boy')
+
+
+    vm.$set(vm.list,1,'北京')
+    Vue.set(vm.list,2,'boy')
+</script>
+</body>
+</html>

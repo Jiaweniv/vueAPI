@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表渲染</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        .active{
+            color: steelblue;
+        }
+    </style>
+</head>
+
+<body>
+<div id="app">
+    <span>循环数组</span>
+    <div v-for="(item,index) of list" :key="item.id">
+        {{item.text}}---{{index}}
+    </div>
+    <span>循环对象</span>
+    <div v-for="(item,key,index) of userInfo">
+            {{item}}---{{key}} ----{{index}}
+        </div>
+</div>
+<script>
+    //vue数组 操作push  pop shift unshift splice数组截取 sort  reverse
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            userInfo:{
+                name: 'Zarva',
+                age: '26',
+                love: '机车'
+            },
+            list:[
+                {
+                    id: '01',
+                    text: 'hello'
+                },{
+                    id: '02',
+                    text: 'hello'
+                },{
+                    id: '03',
+                    text: 'hello'
+                },{
+                    id: '04',
+                    text: 'hello'
+                },{
+                    id: '05',
+                    text: 'hello'
+                },{
+                    id: '06',
+                    text: 'hello'
+                },{
+                    id: '07',
+                    text: 'hello'
+                }
+            ]
+        }
+    })
+</script>
+</body>
+</html>

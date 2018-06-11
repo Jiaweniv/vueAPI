@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件使用中的细节点</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        .active{
+            color: steelblue;
+        }
+    </style>
+</head>
+
+<body>
+<div id="app">
+    <table>
+        <tbody>
+            <tr is="rowItem"></tr>
+            <tr is="rowItem"></tr>
+            <tr is="rowItem"></tr>
+        </tbody>
+    </table>
+    <select >
+        <option  is="optionItem"></option>
+    </select>
+    <ul>
+        <li is="liList"></li>
+    </ul>
+    <div 
+        ref="hello" 
+        @click="hanldClick"
+    >
+        hello world</div>
+    <counter ref="one" @add="addNumber"></counter>
+    <counter ref="two" @add="addNumber"></counter>
+    <div>{{totle}}</div>
+</div>
+<script>
+    Vue.component('rowItem',{
+        data: function(){
+            return {
+                content: 'this is a tr'
+            }
+        },
+        template: '<tr><td>{{content}}</td></tr>'
+    })
+    Vue.component('optionItem',{
+        template: '<option>this is a option</option>'
+    })
+    Vue.component('liList',{
+        template: '<li> this is a li </li>'
+    })
+    Vue.component('counter',{
+        data:function(){
+            return {
+                number: 0
+            }
+        },
+        template: '<div @click="hanldClick2">{{number}}</div>',
+        methods: {
+            hanldClick2: function (params) {
+                this.number++;
+                this.$emit('add')
+            }
+        }
+    })
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            userInfo:{
+                name: 'Zarva',
+                age: '26',
+                love: '机车'
+            },
+            list: [1, 2, 3, 4, 5],
+            totle: 0,
+                
+        },
+        methods: {
+            hanldClick: function (params) {
+                console.log(this.$refs.hello)
+            },
+            addNumber: function(){
+                this.totle = this.$refs.one.number + this.$refs.two.number
+            }
+        }
+    })
+    vm.$set(vm.userInfo,'address','北京')
+    Vue.set(vm.userInfo,'sex','boy')
+
+
+    vm.$set(vm.list,1,'北京')
+    Vue.set(vm.list,2,'boy')
+</script>
+</body>
+</html>
